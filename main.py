@@ -67,7 +67,7 @@ def main(config):
                                                             shuffle=True)
     i = 0
     for b in train_iter:
-        i += 1
+        print(b)
     print('Train Iter elements number', i, flush=True)
     model = BabiUTransformer(num_vocab=vocab_len, 
                     embedding_size=config.emb, 
