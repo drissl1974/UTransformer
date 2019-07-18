@@ -98,8 +98,14 @@ def main(config):
     avg_best = 0
     cnt = 0
     model.train()
+    step = 0
     for b in train_iter:
+        print('Iteration step = ',step,flush=True)
         story, query, answer = b.story,b.query,b.answer.squeeze()
+        print('Story',story,flush=True)
+        print('Query',query,flush=True)
+        print('Answer',answer,flush=True)
+
         if(config.cuda): story, query, answer = story.cuda(), query.cuda(), answer.cuda()
         if(config.noam):
             opt.optimizer.zero_grad()
@@ -114,6 +120,7 @@ def main(config):
             avg_p_t = torch.sum(torch.sum(p_t,dim=1)/p_t.size(1))/p_t.size(0)
             loss += config.act_loss_weight * avg_p_t.item()
 
+        step += 1
         loss.backward()
         opt.step()
 
@@ -121,8 +128,8 @@ def main(config):
         loss_nb.append(loss.item())
         pred = pred_prob[1].data.max(1)[1] # max func return (max, argmax)
         correct.append(np.mean(pred.eq(answer.data).cpu().numpy()))
-        if cnt_batch == 0:
-            weights_best = deepcopy(model.state_dict())
+        #if cnt_batch == 0:
+        #    weights_best = deepcopy(model.state_dict())
         cnt_batch += 1
         if(cnt_batch % 10 == 0):
             acc = np.mean(correct)
@@ -158,6 +165,7 @@ if __name__ == "__main__":
     config = parse_config()
     print('config',config,flush=True)
     for t in range(1,21):
+        print('Working on task {}'.format(t))
         config.task = t
         acc = []
         for i in range(config.run_avg):
