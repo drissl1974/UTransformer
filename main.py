@@ -154,8 +154,11 @@ def main(config):
             loss_nb = []
             cnt_batch = 0
 
-
-    model.load_state_dict({ name: weights_best[name] for name in weights_best })
+    try:
+        model.load_state_dict({ name: weights_best[name] for name in weights_best })
+    except:
+        continue
+        
     acc_test, loss_test = evaluate(model, criterion, test_iter)
     if(config.verbose):
         print("TST ACC:{:.4f}\tTST LOSS:{:.4f}".format(acc_val, loss_val))  
