@@ -121,6 +121,7 @@ def main(config):
         loss_nb.append(loss.item())
         pred = pred_prob[1].data.max(1)[1] # max func return (max, argmax)
         correct.append(np.mean(pred.eq(answer.data).cpu().numpy()))
+        weights_best = deepcopy(model.state_dict())
         cnt_batch += 1
         if(cnt_batch % 10 == 0):
             acc = np.mean(correct)
