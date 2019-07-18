@@ -34,7 +34,7 @@ def get_babi_vocab(task):
                                          tenK=True, only_supporting=False)
     text.build_vocab(train)
     vocab_len = len(text.vocab.freqs) 
-    # print("VOCAB LEN:",vocab_len )
+    print("VOCAB LEN:",vocab_len )
     return vocab_len + 1
 
 def evaluate(model, criterion, loader):
