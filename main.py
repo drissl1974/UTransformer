@@ -100,11 +100,11 @@ def main(config):
     model.train()
     step = 0
     for b in train_iter:
-        print('Iteration step = ',step,flush=True)
+        #print('Iteration step = ',step,flush=True)
         story, query, answer = b.story,b.query,b.answer.squeeze()
-        print('Story tensor shape',story.shape,flush=True)
-        print('Query tensor shape',query.shape,flush=True)
-        print('Answer tensor shape',answer.shape,flush=True)
+        #print('Story tensor shape',story.shape,flush=True)
+        #print('Query tensor shape',query.shape,flush=True)
+        #print('Answer tensor shape',answer.shape,flush=True)
 
         if(config.cuda): story, query, answer = story.cuda(), query.cuda(), answer.cuda()
         if(config.noam):
