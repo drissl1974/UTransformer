@@ -96,7 +96,7 @@ def main(config):
     loss_nb = []
     cnt_batch = 0
     avg_best = 0
-    cnt = 0
+    cnt = 1
     model.train()
     step = 0
     for b in train_iter:
