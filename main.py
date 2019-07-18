@@ -96,7 +96,7 @@ def main(config):
     loss_nb = []
     cnt_batch = 0
     avg_best = 0
-    cnt = 1
+    cnt = 0
     model.train()
     step = 0
     for b in train_iter:
@@ -131,7 +131,7 @@ def main(config):
         #if cnt_batch == 0:
         #    weights_best = deepcopy(model.state_dict())
         cnt_batch += 1
-        if(cnt_batch % 10 == 0):
+        if(cnt_batch % 5 == 0): # Change the number of steps to save model
             acc = np.mean(correct)
             loss_nb = np.mean(loss_nb)
             if(config.verbose):
