@@ -65,6 +65,7 @@ def main(config):
                                                             only_supporting=False, 
                                                             sort=False, 
                                                             shuffle=True)
+    print('Train_Iter',train_iter,flush=True)
     model = BabiUTransformer(num_vocab=vocab_len, 
                     embedding_size=config.emb, 
                     hidden_size=config.emb, 
