@@ -150,6 +150,7 @@ def main(config):
 
 if __name__ == "__main__":
     config = parse_config()
+    print('config',config,flush=True)
     for t in range(1,21):
         config.task = t
         acc = []
